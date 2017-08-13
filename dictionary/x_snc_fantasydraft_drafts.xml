@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Drafts" max_length="40" name="x_snc_fantasydraft_drafts" type="collection">
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
+        <element choice="3" default="order" label="State" max_length="40" name="state" type="choice">
+            <choice>
+                <element label="Setting Order" sequence="1" value="order"/>
+                <element label="Drafting" sequence="2" value="drafting"/>
+                <element label="Complete" sequence="3" value="complete"/>
+                <element label="Cancelled" sequence="4" value="cancelled"/>
+            </choice>
+        </element>
+    </element>
+</database>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Teams" max_length="40" name="x_snc_fantasydraft_teams" type="collection">
+        <element display="true" label="Abbreviation" max_length="5" name="abbr" type="string"/>
+        <element label="Bye Week" max_length="40" name="bye_week" type="integer"/>
+        <element label="Logo" max_length="40" name="logo" type="user_image"/>
+        <element label="Name" max_length="50" name="name" type="string"/>
+    </element>
+</database>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="position" table="x_snc_fantasydraft_players" version="3">
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>position</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>QB</label>
+            <language>en</language>
+            <name>x_snc_fantasydraft_players</name>
+            <sequence>1</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-08-13 04:31:33</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b32ffaa9dbe80b007e0ef2131f96193c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-08-13 04:31:33</sys_updated_on>
+            <value>QB</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>position</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>RB</label>
+            <language>en</language>
+            <name>x_snc_fantasydraft_players</name>
+            <sequence>2</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-08-13 04:31:41</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>5a3ffaa9dbe80b007e0ef2131f961906</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-08-13 04:31:41</sys_updated_on>
+            <value>RB</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>position</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>WR</label>
+            <language>en</language>
+            <name>x_snc_fantasydraft_players</name>
+            <sequence>3</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-08-13 04:31:49</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>ec4ffaa9dbe80b007e0ef2131f961947</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-08-13 04:31:49</sys_updated_on>
+            <value>WR</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>position</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>TE</label>
+            <language>en</language>
+            <name>x_snc_fantasydraft_players</name>
+            <sequence>4</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-08-13 04:32:16</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>6d5f3ea9dbe80b007e0ef2131f9619ff</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-08-13 04:32:16</sys_updated_on>
+            <value>TE</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>position</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>K</label>
+            <language>en</language>
+            <name>x_snc_fantasydraft_players</name>
+            <sequence>5</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-08-13 04:32:40</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>e66fbea9dbe80b007e0ef2131f9619f3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-08-13 04:32:40</sys_updated_on>
+            <value>K</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>position</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>DST</label>
+            <language>en</language>
+            <name>x_snc_fantasydraft_players</name>
+            <sequence>6</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-08-13 04:32:52</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>137f32e9dbe80b007e0ef2131f96195f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-08-13 04:32:52</sys_updated_on>
+            <value>DST</value>
+        </sys_choice>
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>position</element>
+            <name>x_snc_fantasydraft_players</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-08-13 04:31:33</sys_created_on>
+            <sys_id>f53ffaa9dbe80b007e0ef2131f961903</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>position</sys_name>
+            <sys_package display_value="Live Fantasy Draft" source="x_snc_fantasydraft">0509ba21dbe80b007e0ef2131f9619b6</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Live Fantasy Draft">0509ba21dbe80b007e0ef2131f9619b6</sys_scope>
+            <sys_update_name>sys_choice_x_snc_fantasydraft_players_position</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-08-13 04:31:33</sys_updated_on>
+        </sys_choice_set>
+    </sys_choice>
+</record_update>

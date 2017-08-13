@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_embedded_help_role">
+    <sys_embedded_help_role action="INSERT_OR_UPDATE">
+        <order>1000</order>
+        <role display_value="x_snc_fantasydraft.players_user" name="x_snc_fantasydraft.players_user">5d2e3669dbe80b007e0ef2131f96198c</role>
+        <sys_class_name>sys_embedded_help_role</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-08-13 04:26:53</sys_created_on>
+        <sys_id>1d2e3669dbe80b007e0ef2131f96198e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>5d2e3669dbe80b007e0ef2131f96198c</sys_name>
+        <sys_package display_value="Live Fantasy Draft" source="x_snc_fantasydraft">0509ba21dbe80b007e0ef2131f9619b6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Live Fantasy Draft">0509ba21dbe80b007e0ef2131f9619b6</sys_scope>
+        <sys_update_name>sys_embedded_help_role_1d2e3669dbe80b007e0ef2131f96198e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-08-13 04:26:53</sys_updated_on>
+    </sys_embedded_help_role>
+</record_update>

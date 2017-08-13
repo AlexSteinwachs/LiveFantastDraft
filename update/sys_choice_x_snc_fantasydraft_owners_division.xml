@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="division" table="x_snc_fantasydraft_owners" version="3">
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>division</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Hearts</label>
+            <language>en</language>
+            <name>x_snc_fantasydraft_owners</name>
+            <sequence>1</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-08-13 04:20:53</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>5fbcbae5dbe80b007e0ef2131f9619f3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-08-13 04:20:53</sys_updated_on>
+            <value>hearts</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>division</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Clubs</label>
+            <language>en</language>
+            <name>x_snc_fantasydraft_owners</name>
+            <sequence>2</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-08-13 04:21:05</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>2accfae5dbe80b007e0ef2131f96198d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-08-13 04:21:05</sys_updated_on>
+            <value>clubs</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>division</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Spades</label>
+            <language>en</language>
+            <name>x_snc_fantasydraft_owners</name>
+            <sequence>3</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-08-13 04:21:16</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>81dc3ee5dbe80b007e0ef2131f961984</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-08-13 04:21:16</sys_updated_on>
+            <value>spades</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>division</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Diamonds</label>
+            <language>en</language>
+            <name>x_snc_fantasydraft_owners</name>
+            <sequence>4</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-08-13 04:21:32</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>08ec7ee5dbe80b007e0ef2131f961958</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-08-13 04:21:32</sys_updated_on>
+            <value>diamonds</value>
+        </sys_choice>
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>division</element>
+            <name>x_snc_fantasydraft_owners</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2017-08-13 04:20:53</sys_created_on>
+            <sys_id>65ccbae5dbe80b007e0ef2131f9619c8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>division</sys_name>
+            <sys_package display_value="Live Fantasy Draft" source="x_snc_fantasydraft">0509ba21dbe80b007e0ef2131f9619b6</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Live Fantasy Draft">0509ba21dbe80b007e0ef2131f9619b6</sys_scope>
+            <sys_update_name>sys_choice_x_snc_fantasydraft_owners_division</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2017-08-13 04:20:53</sys_updated_on>
+        </sys_choice_set>
+    </sys_choice>
+</record_update>

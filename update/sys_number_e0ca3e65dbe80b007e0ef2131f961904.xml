@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_number">
+    <sys_number action="INSERT_OR_UPDATE">
+        <category display_value="" name="x_snc_fantasydraft_drafts">x_snc_fantasydraft_drafts</category>
+        <maximum_digits>3</maximum_digits>
+        <number>1</number>
+        <prefix>DRA</prefix>
+        <sys_class_name>sys_number</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-08-13 04:12:05</sys_created_on>
+        <sys_id>e0ca3e65dbe80b007e0ef2131f961904</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>DRA</sys_name>
+        <sys_package display_value="Live Fantasy Draft" source="x_snc_fantasydraft">0509ba21dbe80b007e0ef2131f9619b6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Live Fantasy Draft">0509ba21dbe80b007e0ef2131f9619b6</sys_scope>
+        <sys_update_name>sys_number_e0ca3e65dbe80b007e0ef2131f961904</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-08-13 04:12:05</sys_updated_on>
+    </sys_number>
+</record_update>
