@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function($filter,$location,$rootScope,$scope,$timeout,spUtil,$window) {
+	var c = this;
+
+	var timer = 60;
+	$scope.activeTimer = true;
+	$scope.remaining = timer;
+
+	$scope.startTimer = function(){
+		$scope.timeout = $timeout(function() {
+			$scope.remaining--;
+			$scope.startTimer();
+		}, 1000);
+	};
+
+	$scope.stopTimer = function(){
+		$scope.activeTimer = false;
+		$timeout.cancel($scope.timeout);
+	};
+
+	$scope.restatTimeout = function() {
+		$scope.activeTimer = true;
+		$scope.timeout = $timeout($scope.startTimer, 1000);
+	}
+
+	$scope.startTimer();
+
+
+
+
+	$scope.getColor = function(time){
+		if (time >= 10){
+			return "btn-success"
+		}
+		if (time < 10 && time >0){
+			return "btn-warning"
+		}
+		if (time <= 0){
+			return "btn-danger"
+		}
+	};
+
+}
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.btn-circle {
+  width: 45px;
+  height: 45px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 16px;
+  line-height: 200%;
+  border-radius: 22.5px;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>draft_header</id>
+        <internal>false</internal>
+        <link/>
+        <name>Draft Header</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[
+loadDraft();
+translateRound(data.current_pick);
+
+function loadDraft() {
+	data.round = 1;
+var dr = new GlideRecord('x_snc_fantasydraft_drafts');
+	dr.get('number', $sp.getParameter("number"));
+	data.current_pick = parseInt(dr.pick_number.getDisplayValue());
+	
+	var co = new GlideRecord('x_snc_fantasydraft_owner_order')
+	co.addQuery('draft',dr.sys_id);
+	co.addQuery('order',translatePick(data.current_pick))
+	co.query();
+	while (co.next()){
+		data.current_owner=co.owner.abbr.getDisplayValue();
+	}
+}
+
+function translatePick(number) {
+	if (number <= 12) {
+		return number;
+	}
+	if (number <=24) {
+		return 25 - number;
+	} else {
+		return translatePick(number-24)
+	}
+}
+
+function translateRound(number) {
+
+	if (number <= 12) {
+		return data.round;
+	} else {
+		number = number - 12;
+		data.round++;
+		translateRound(number);
+	}
+}]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-08-20 04:03:28</sys_created_on>
+        <sys_id>a2eb7233db2ccf007e0ef2131f961920</sys_id>
+        <sys_mod_count>78</sys_mod_count>
+        <sys_name>Draft Header</sys_name>
+        <sys_package display_value="Live Fantasy Draft" source="x_snc_fantasydraft">0509ba21dbe80b007e0ef2131f9619b6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Live Fantasy Draft">0509ba21dbe80b007e0ef2131f9619b6</sys_scope>
+        <sys_update_name>sp_widget_a2eb7233db2ccf007e0ef2131f961920</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-08-20 07:06:50</sys_updated_on>
+        <template><![CDATA[<div ng-if="activeTimer" class="col-xs-1 btn btn-circle text-white" ng-class="getColor(remaining)" ng-click="stopTimer()">
+  {{remaining}}
+</div>
+<div ng-if="!activeTimer" class="col-xs-1 btn btn-circle text-white" ng-class="getColor(remaining)" ng-click="restatTimeout()">
+  {{remaining}}
+</div>
+<div class="col-xs-8 text-center">
+  <button class="btn btn-info btn-lg" disabled>
+    {{c.data.current_owner}}: P{{c.data.current_pick}} in R#{{c.data.round}}
+  </button>
+
+</div>
+<div class="col-xs-1 btn btn-circle text-white btn-info">
+ <span class="fa fa-pencil"></span>
+</div>
+]]></template>
+    </sp_widget>
+</record_update>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element extends="sys_import_set_row" label="Imp Tmpl X Snc Fantasydraft Players" max_length="40" name="u_imp_tmpl_x_snc_fantasydraft_players" type="collection">
+        <element attributes="import_attribute_name=ADP" label="ADP" max_length="20" name="u_adp" type="decimal"/>
+        <element attributes="import_attribute_name=Name,edge_encryption_enabled=true" label="Name" max_length="50" name="u_name" type="string"/>
+        <element attributes="import_attribute_name=Overall" label="Overall" max_length="20" name="u_overall" type="decimal"/>
+        <element attributes="import_attribute_name=Position,edge_encryption_enabled=true" label="Position" max_length="40" name="u_position" type="string"/>
+        <element attributes="import_attribute_name=Sys ID,edge_encryption_enabled=true" label="Sys ID" max_length="40" name="u_sys_id" type="string"/>
+        <element attributes="import_attribute_name=Team,edge_encryption_enabled=true" label="Team" max_length="32" name="u_team" type="string"/>
+    </element>
+</database>

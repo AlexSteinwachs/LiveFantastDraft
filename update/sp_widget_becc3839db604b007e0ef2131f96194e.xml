@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function($rootScope,$scope,$timeout,spUtil,$window) {
+	/* widget controller */
+	var c = this;
+
+	$scope.createDraft = function() {
+		c.data.action = "create";
+		c.server.update().then(function() {
+			spUtil.addTrivialMessage('Created!');
+		});
+
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>create_draft</id>
+        <internal>false</internal>
+        <link/>
+        <name>Create Draft</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[
+if (typeof input != "undefined" && input.action=="create") {
+	startDraft();
+}
+
+
+function startDraft() {
+	var dr = new GlideRecord('x_snc_fantasydraft_drafts');
+	dr.pick_number=1;
+	dr.state='order';
+	var draftSys = dr.insert();
+
+	var dpl = new GlideRecord('x_snc_fantasydraft_players');
+	dpl.query();
+	while (dpl.next()) {
+		var dpp = new GlideRecord('x_snc_fantasydraft_draft_picks');
+		dpp.player = dpl.sys_id;
+		dpp.draft = draftSys;
+		dpp.insert();
+	}
+	
+	var o = new GlideRecord('x_snc_fantasydraft_owners');
+	o.query();
+	var draftOrder=1;
+	while(o.next()){
+		var oo = new GlideRecord('x_snc_fantasydraft_owner_order');
+		oo.owner=o.sys_id;
+		oo.draft=draftSys;
+		oo.order=draftOrder;
+		draftOrder++;
+		oo.insert();
+	}
+}]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-08-13 13:40:13</sys_created_on>
+        <sys_id>becc3839db604b007e0ef2131f96194e</sys_id>
+        <sys_mod_count>24</sys_mod_count>
+        <sys_name>Create Draft</sys_name>
+        <sys_package display_value="Live Fantasy Draft" source="x_snc_fantasydraft">0509ba21dbe80b007e0ef2131f9619b6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Live Fantasy Draft">0509ba21dbe80b007e0ef2131f9619b6</sys_scope>
+        <sys_update_name>sp_widget_becc3839db604b007e0ef2131f96194e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-08-20 03:36:04</sys_updated_on>
+        <template><![CDATA[<div class="text-center">
+<button class="btn btn-success text-center" ng-click="createDraft()"><span class="fa fa-plus"></span> Create Draft</button>
+</div>]]></template>
+    </sp_widget>
+</record_update>

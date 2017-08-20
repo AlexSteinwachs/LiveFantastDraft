@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function($rootScope,$scope,$timeout,spUtil,$window) {
+	/* widget controller */
+	var c = this;
+
+	$scope.startDraft = function() {
+		c.data.action = 'start';
+		c.server.update().then(function() {
+			$window.location = '?id=draft&number='+c.data.draft_number;
+		});
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>start_draft</id>
+        <internal>false</internal>
+        <link/>
+        <name>Start Draft</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[data.draft_number = $sp.getParameter("number");
+
+if (typeof input != "undefined" && input.action=="start") {
+	startDraft();
+}
+
+function startDraft(){
+	var d = new GlideRecord('x_snc_fantasydraft_drafts');
+	d.get('number',$sp.getParameter("number"));
+	d.state='drafting';
+	d.update();
+	data.draft = d.state.getDisplayValue();
+}]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-08-20 03:34:09</sys_created_on>
+        <sys_id>dd357ebbdbe8cf007e0ef2131f961985</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_name>Start Draft</sys_name>
+        <sys_package display_value="Live Fantasy Draft" source="x_snc_fantasydraft">0509ba21dbe80b007e0ef2131f9619b6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Live Fantasy Draft">0509ba21dbe80b007e0ef2131f9619b6</sys_scope>
+        <sys_update_name>sp_widget_dd357ebbdbe8cf007e0ef2131f961985</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-08-20 04:07:49</sys_updated_on>
+        <template><![CDATA[<div class="text-center">
+<button class="btn btn-primary text-center" ng-click="startDraft()"><span class="fa fa-play"></span> Start Draft</button>
+</div>
+]]></template>
+    </sp_widget>
+</record_update>

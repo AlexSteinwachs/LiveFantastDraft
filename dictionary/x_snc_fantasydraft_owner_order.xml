@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Owner Order" max_length="40" name="x_snc_fantasydraft_owner_order" type="collection">
+        <element label="Draft" max_length="32" name="draft" reference="x_snc_fantasydraft_drafts" type="reference"/>
+        <element label="order" max_length="40" name="order" type="integer"/>
+        <element display="true" label="Owner" max_length="32" name="owner" reference="x_snc_fantasydraft_owners" type="reference"/>
+        <index name="index">
+            <element name="owner"/>
+        </index>
+        <index name="index2">
+            <element name="draft"/>
+        </index>
+    </element>
+</database>

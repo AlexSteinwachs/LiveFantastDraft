@@ -2,6 +2,7 @@
 <database>
     <element label="Drafts" max_length="40" name="x_snc_fantasydraft_drafts" type="collection">
         <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
+        <element label="Pick Number" max_length="40" name="pick_number" type="integer"/>
         <element choice="3" default="order" label="State" max_length="40" name="state" type="choice">
             <choice>
                 <element label="Setting Order" sequence="1" value="order"/>

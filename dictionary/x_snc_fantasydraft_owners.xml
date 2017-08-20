@@ -10,8 +10,8 @@
                 <element label="Diamonds" sequence="4" value="diamonds"/>
             </choice>
         </element>
-        <element label="Owner Name" max_length="32" name="owner_name" reference="sys_user" type="reference"/>
-        <element label="Team Name" max_length="100" name="team_name" type="string"/>
+        <element label="Owner Name" max_length="32" name="owner_name" type="string"/>
+        <element display="true" label="Team Name" max_length="100" name="team_name" type="string"/>
         <index name="index">
             <element name="owner_name"/>
         </index>

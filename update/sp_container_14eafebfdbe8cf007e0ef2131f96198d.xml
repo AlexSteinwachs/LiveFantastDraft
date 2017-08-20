@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_container">
+    <sp_container action="INSERT_OR_UPDATE">
+        <background_color/>
+        <background_image/>
+        <background_style>default</background_style>
+        <bootstrap_alt>false</bootstrap_alt>
+        <class_name/>
+        <container_class_name/>
+        <name>Draft - Container 3</name>
+        <order>3</order>
+        <sp_page display_value="draft">0ce6b23fdbe8cf007e0ef2131f96192d</sp_page>
+        <subheader>false</subheader>
+        <sys_class_name>sp_container</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-08-20 03:58:56</sys_created_on>
+        <sys_id>14eafebfdbe8cf007e0ef2131f96198d</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Draft - Container 3</sys_name>
+        <sys_package display_value="Live Fantasy Draft" source="x_snc_fantasydraft">0509ba21dbe80b007e0ef2131f9619b6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Live Fantasy Draft">0509ba21dbe80b007e0ef2131f9619b6</sys_scope>
+        <sys_update_name>sp_container_14eafebfdbe8cf007e0ef2131f96198d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-08-20 04:05:40</sys_updated_on>
+        <title/>
+        <width>container-fluid</width>
+    </sp_container>
+</record_update>
