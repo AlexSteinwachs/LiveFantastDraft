@@ -11,23 +11,23 @@
         <roles/>
         <short_description/>
         <size>md</size>
-        <sp_column display_value="1">e8cb7effdbe8cf007e0ef2131f9619e6</sp_column>
-        <sp_widget display_value="Draft Header">a2eb7233db2ccf007e0ef2131f961920</sp_widget>
+        <sp_column display_value="1">40db7effdbe8cf007e0ef2131f961959</sp_column>
+        <sp_widget display_value="Draft Player List">9f14a248dbf403407e0ef2131f961956</sp_widget>
         <sys_class_name>sp_instance</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2017-08-20 04:04:15</sys_created_on>
-        <sys_id>061cf233db2ccf007e0ef2131f9619a9</sys_id>
+        <sys_created_on>2017-08-22 14:10:16</sys_created_on>
+        <sys_id>32f95fa4dbf083407e0ef2131f961957</sys_id>
         <sys_mod_count>1</sys_mod_count>
         <sys_name/>
         <sys_package display_value="Live Fantasy Draft" source="x_snc_fantasydraft">0509ba21dbe80b007e0ef2131f9619b6</sys_package>
         <sys_policy/>
         <sys_scope display_value="Live Fantasy Draft">0509ba21dbe80b007e0ef2131f9619b6</sys_scope>
-        <sys_update_name>sp_instance_061cf233db2ccf007e0ef2131f9619a9</sys_update_name>
+        <sys_update_name>sp_instance_32f95fa4dbf083407e0ef2131f961957</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-08-20 21:14:12</sys_updated_on>
+        <sys_updated_on>2017-08-22 14:10:20</sys_updated_on>
         <title/>
         <url/>
         <widget_parameters/>
     </sp_instance>
-    <sys_translated_text action="delete_multiple" query="documentkey=061cf233db2ccf007e0ef2131f9619a9"/>
+    <sys_translated_text action="delete_multiple" query="documentkey=32f95fa4dbf083407e0ef2131f961957"/>
 </record_update>

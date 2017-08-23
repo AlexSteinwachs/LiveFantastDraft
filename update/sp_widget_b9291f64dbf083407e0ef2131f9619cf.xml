@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function($filter, $location,$rootScope,$scope,$timeout,spUtil,$window) {
+	var c = this;
+	
+$scope.list = [];
+      $scope.search = function() {
+        if ($scope.text1) {
+          $scope.list.push($scope.text1);
+          $scope.text = '';
+        }
+      };
+	
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>body {
+    padding-top: 50px;
+}
+.dropdown.dropdown-lg .dropdown-menu {
+    margin-top: -1px;
+    padding: 6px 20px;
+}
+.input-group-btn .btn-group {
+    display: flex !important;
+}
+.btn-group .btn {
+    border-radius: 0;
+    margin-left: -1px;
+}
+.btn-group .btn:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.btn-group .form-horizontal .btn[type="submit"] {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+.form-group .form-control:last-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+@media screen and (min-width: 768px) {
+    #adv-search {
+        width: 500px;
+        margin: 0 auto;
+    }
+    .dropdown.dropdown-lg {
+        position: static !important;
+    }
+    .dropdown.dropdown-lg .dropdown-menu {
+        min-width: 500px;
+    }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>draft_search</id>
+        <internal>false</internal>
+        <link/>
+        <name>Draft Search</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script/>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-08-22 14:06:38</sys_created_on>
+        <sys_id>b9291f64dbf083407e0ef2131f9619cf</sys_id>
+        <sys_mod_count>58</sys_mod_count>
+        <sys_name>Draft Search</sys_name>
+        <sys_package display_value="Live Fantasy Draft" source="x_snc_fantasydraft">0509ba21dbe80b007e0ef2131f9619b6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Live Fantasy Draft">0509ba21dbe80b007e0ef2131f9619b6</sys_scope>
+        <sys_update_name>sp_widget_b9291f64dbf083407e0ef2131f9619cf</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-08-22 15:50:24</sys_updated_on>
+        <template><![CDATA[<div>
+  
+  <form ng-submit="search()" >
+  Enter text and hit enter:
+  <input type="text" ng-model="text1" name="text" />
+  <input type="submit" id="submit" value="Submit" />
+  <pre>list={{list}}</pre>
+</form>
+</div>
+<div class="container">
+  <div class="row">
+      <div class="input-group" id="adv-search">
+        <input type="text" class="form-control" placeholder="Search for snippets" />
+        <div class="input-group-btn">
+          <div class="btn-group" role="group">
+            <div class="dropdown dropdown-lg">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" ><span class="caret"></span></button>
+              <div class="dropdown-menu dropdown-menu-right" role="menu">
+                <form class="form-horizontal" role="form">
+                  <div class="form-group">
+                    <label for="filter">Position</label>
+                    <select class="form-control">
+                      <option value="0" selected>All Snippets</option>
+                      <option value="1">Featured</option>
+                      <option value="2">Most popular</option>
+                      <option value="3">Top rated</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="contain">Bye Week</label>
+                    <input class="form-control" type="text" id="byeWeek"/>
+                  </div>
+                  <div class="form-group">
+                    <label for="contain">Team</label>
+                    <input class="form-control" type="text" />
+                  </div>
+                  <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+                </form>
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary" ng-click="search()"><span class="glyphicon glyphicon-search"></span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+]]></template>
+    </sp_widget>
+</record_update>

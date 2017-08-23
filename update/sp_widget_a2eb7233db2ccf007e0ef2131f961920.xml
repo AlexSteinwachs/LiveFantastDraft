@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
-        <client_script><![CDATA[function($filter,$location,$rootScope,$scope,$timeout,spUtil,$window) {
+        <client_script><![CDATA[function($location,$scope,$rootScope,$timeout,$window) {
 	var c = this;
 
-	var timer = 60;
+    $timeout(function(){
+			var pickingOwner = {
+				"id": c.data.draftingOwnerId,
+				"pick": c.data.current_pick
+			};
+$rootScope.$broadcast('draftingOwner', pickingOwner);
+		}, 1000);
+	
+	if (c.data.round < 8){
+	 c.data.timer = 60;
+	} else {
+	 c.data.timer = 120;
+
+	}
+	
 	$scope.activeTimer = true;
-	$scope.remaining = timer;
+	$scope.remaining = c.data.timer;
 
 	$scope.startTimer = function(){
 		$scope.timeout = $timeout(function() {
@@ -27,7 +41,9 @@
 
 	$scope.startTimer();
 
-
+$scope.editDraft = function(){
+				$window.location = '?id=edit_draft&number='+c.data.draft_number;
+}
 
 
 	$scope.getColor = function(time){
@@ -41,6 +57,7 @@
 			return "btn-danger"
 		}
 	};
+
 
 }
 ]]></client_script>
@@ -67,7 +84,8 @@
         <option_schema/>
         <public>false</public>
         <roles/>
-        <script><![CDATA[
+        <script><![CDATA[data.draft_number = $sp.getParameter("number");
+
 loadDraft();
 translateRound(data.current_pick);
 
@@ -82,7 +100,8 @@ var dr = new GlideRecord('x_snc_fantasydraft_drafts');
 	co.addQuery('order',translatePick(data.current_pick))
 	co.query();
 	while (co.next()){
-		data.current_owner=co.owner.abbr.getDisplayValue();
+		data.draftingOwner=co.owner.abbr.getDisplayValue();
+		data.draftingOwnerId=co.owner.sys_id.getDisplayValue();
 	}
 }
 
@@ -100,7 +119,7 @@ function translatePick(number) {
 function translateRound(number) {
 
 	if (number <= 12) {
-		return data.round;
+		return parseInt(data.round);
 	} else {
 		number = number - 12;
 		data.round++;
@@ -112,14 +131,14 @@ function translateRound(number) {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2017-08-20 04:03:28</sys_created_on>
         <sys_id>a2eb7233db2ccf007e0ef2131f961920</sys_id>
-        <sys_mod_count>78</sys_mod_count>
+        <sys_mod_count>124</sys_mod_count>
         <sys_name>Draft Header</sys_name>
         <sys_package display_value="Live Fantasy Draft" source="x_snc_fantasydraft">0509ba21dbe80b007e0ef2131f9619b6</sys_package>
         <sys_policy/>
         <sys_scope display_value="Live Fantasy Draft">0509ba21dbe80b007e0ef2131f9619b6</sys_scope>
         <sys_update_name>sp_widget_a2eb7233db2ccf007e0ef2131f961920</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-08-20 07:06:50</sys_updated_on>
+        <sys_updated_on>2017-08-22 13:37:07</sys_updated_on>
         <template><![CDATA[<div ng-if="activeTimer" class="col-xs-1 btn btn-circle text-white" ng-class="getColor(remaining)" ng-click="stopTimer()">
   {{remaining}}
 </div>
@@ -128,12 +147,12 @@ function translateRound(number) {
 </div>
 <div class="col-xs-8 text-center">
   <button class="btn btn-info btn-lg" disabled>
-    {{c.data.current_owner}}: P{{c.data.current_pick}} in R#{{c.data.round}}
+    {{c.data.draftingOwner}}: P{{c.data.current_pick}} in R#{{c.data.round}}
   </button>
 
 </div>
-<div class="col-xs-1 btn btn-circle text-white btn-info">
- <span class="fa fa-pencil"></span>
+<div class="col-xs-1 btn btn-circle text-white btn-info" ng-click="editDraft()">
+   <span class="fa fa-pencil"></span>
 </div>
 ]]></template>
     </sp_widget>
