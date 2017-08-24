@@ -3,15 +3,56 @@
     <sp_widget action="INSERT_OR_UPDATE">
         <client_script><![CDATA[function($filter, $location,$rootScope,$scope,$timeout,spUtil,$window) {
 	var c = this;
-	
-$scope.list = [];
-      $scope.search = function() {
-        if ($scope.text1) {
-          $scope.list.push($scope.text1);
-          $scope.text = '';
-        }
-      };
-	
+	c.data.search=false;
+	c.data.advSearch=false;
+
+	$scope.showSearch = function(){
+		if(c.data.advSearch){
+			c.data.advSearch = false;
+			return;
+		}
+		c.data.advSearch = true;
+		return;
+	}
+
+	$scope.search = function(){
+		console.log("searching")
+		var searchQuery = {
+			"name": c.data.searchName,
+			"position": c.data.searchPosition,
+			"bye": c.data.searchByeWeek,
+			"team": c.data.searchTeam
+		}
+		$rootScope.$broadcast('searchQuery', searchQuery);
+	}
+
+	$scope.reset = function(search){
+		if (search == 'searchName'){
+			c.data.searchName='';
+			$scope.search();
+			return;
+		}
+		if (search == 'searchPosition'){
+			c.data.searchPosition='';
+			$scope.search();
+			return;
+		}
+		if (search == 'searchByeWeek'){
+			c.data.searchByeWeek='';
+			$scope.search();
+			return;
+		}
+		if (search == 'searchTeam'){
+			c.data.searchTeam='';
+			$scope.search();
+			return;
+		} else{
+			c.data.searchName=c.data.searchPosition=c.data.searchByeWeek=c.data.searchTeam='';
+			$scope.search();
+			return;
+		}
+	}
+
 }]]></client_script>
         <controller_as>c</controller_as>
         <css>body {
@@ -21,6 +62,7 @@ $scope.list = [];
     margin-top: -1px;
     padding: 6px 20px;
 }
+
 .input-group-btn .btn-group {
     display: flex !important;
 }
@@ -70,67 +112,74 @@ $scope.list = [];
         <option_schema/>
         <public>false</public>
         <roles/>
-        <script/>
+        <script><![CDATA[loadTeams();
+
+
+function loadTeams(){
+	data.positions = ['WR','RB','QB','TE','DST','K']
+	data.teams = [];
+	data.byeWeek = [];
+	var team = new GlideRecord('x_snc_fantasydraft_teams');
+	team.query();
+	while(team.next()){
+		data.teams.push(team.abbr.getDisplayValue());
+		data.byeWeek.push(parseInt(team.bye_week.getDisplayValue()));
+	}
+	data.teams = data.teams.sort();
+	data.byeWeek = sort_unique(data.byeWeek);
+}
+
+function sort_unique(arr) {
+    if (arr.length === 0) return arr;
+    arr = arr.sort(function (a, b) { return a*1 - b*1; });
+    var ret = [arr[0]];
+    for (var i = 1; i < arr.length; i++) { // start loop at 1 as element 0 can never be a duplicate
+        if (arr[i-1] !== arr[i]) {
+            ret.push(arr[i]);
+        }
+    }
+    return ret;
+}]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2017-08-22 14:06:38</sys_created_on>
         <sys_id>b9291f64dbf083407e0ef2131f9619cf</sys_id>
-        <sys_mod_count>58</sys_mod_count>
+        <sys_mod_count>188</sys_mod_count>
         <sys_name>Draft Search</sys_name>
         <sys_package display_value="Live Fantasy Draft" source="x_snc_fantasydraft">0509ba21dbe80b007e0ef2131f9619b6</sys_package>
         <sys_policy/>
         <sys_scope display_value="Live Fantasy Draft">0509ba21dbe80b007e0ef2131f9619b6</sys_scope>
         <sys_update_name>sp_widget_b9291f64dbf083407e0ef2131f9619cf</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-08-22 15:50:24</sys_updated_on>
-        <template><![CDATA[<div>
-  
-  <form ng-submit="search()" >
-  Enter text and hit enter:
-  <input type="text" ng-model="text1" name="text" />
-  <input type="submit" id="submit" value="Submit" />
-  <pre>list={{list}}</pre>
-</form>
+        <sys_updated_on>2017-08-24 03:19:35</sys_updated_on>
+        <template><![CDATA[<div class="panel-default input-group">
+  <input type="text" class="form-control" placeholder="Player name" ng-model="c.data.searchName" ng-change="search()"/>
+  <span class="input-group-btn" type="button">
+    <button class="form-control btn btn-default" ng-click="showSearch()">
+      <span class="caret"></span>
+    </button>
+  </span>
 </div>
-<div class="container">
-  <div class="row">
-      <div class="input-group" id="adv-search">
-        <input type="text" class="form-control" placeholder="Search for snippets" />
-        <div class="input-group-btn">
-          <div class="btn-group" role="group">
-            <div class="dropdown dropdown-lg">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" ><span class="caret"></span></button>
-              <div class="dropdown-menu dropdown-menu-right" role="menu">
-                <form class="form-horizontal" role="form">
-                  <div class="form-group">
-                    <label for="filter">Position</label>
-                    <select class="form-control">
-                      <option value="0" selected>All Snippets</option>
-                      <option value="1">Featured</option>
-                      <option value="2">Most popular</option>
-                      <option value="3">Top rated</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="contain">Bye Week</label>
-                    <input class="form-control" type="text" id="byeWeek"/>
-                  </div>
-                  <div class="form-group">
-                    <label for="contain">Team</label>
-                    <input class="form-control" type="text" />
-                  </div>
-                  <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
-                </form>
-              </div>
-            </div>
-            <button type="button" class="btn btn-primary" ng-click="search()"><span class="glyphicon glyphicon-search"></span></button>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="panel panel-default" ng-show="c.data.advSearch">
+  <div >
+    <div class="panel-heading panel-title">Position</div>
+    <select class="form-control panel-body" ng-model="c.data.searchPosition" ng-options="p for p in c.data.positions" value="{{p}}" ng-change="search()"></select>
   </div>
-
-]]></template>
+  <div >
+    <div class="panel-heading panel-title">Bye Week</div>
+    <select class="form-control" ng-model="c.data.searchByeWeek" ng-options="b for b in c.data.byeWeek" value="{{b}}" ng-change="search()"></select>
+  </div>
+  <div >
+    <div class="panel-heading panel-title">Team</div>
+    <select class="form-control" ng-model="c.data.searchTeam" ng-options="t for t in c.data.teams" value="{{t}}" ng-change="search()"></select>
+  </div>
+</div>
+<div>
+  <button type="button" ng-show="c.data.searchName" class="btn btn-info" ng-click="reset('searchName')"> {{c.data.searchName}} <span class="fa fa-times"></span></button>
+  <button type="button" ng-show="c.data.searchPosition" class="btn btn-info" ng-click="reset('searchPosition')">{{c.data.searchPosition}}<span class="fa fa-times"></span></button>
+  <button type="button" ng-show="c.data.searchByeWeek" class="btn btn-info" ng-click="reset('searchByeWeek')">{{c.data.searchByeWeek}}<span class="fa fa-times"></span></button>
+  <button type="button" ng-show="c.data.searchTeam" class="btn btn-info" ng-click="reset('searchTeam')">{{c.data.searchTeam}}<span class="fa fa-times"></span></button>
+</div>]]></template>
     </sp_widget>
 </record_update>

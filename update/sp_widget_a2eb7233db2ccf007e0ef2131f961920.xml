@@ -7,7 +7,8 @@
     $timeout(function(){
 			var pickingOwner = {
 				"id": c.data.draftingOwnerId,
-				"pick": c.data.current_pick
+				"pick": c.data.current_pick,
+				"round": c.data.round
 			};
 $rootScope.$broadcast('draftingOwner', pickingOwner);
 		}, 1000);
@@ -70,6 +71,28 @@ $scope.editDraft = function(){
   font-size: 16px;
   line-height: 200%;
   border-radius: 22.5px;
+}
+
+.dst {
+      background-color: #a0caf0 !important;
+}
+.k {
+      background-color: #ff0080 !important;
+}
+.qb {
+      background-color: #7efecf !important;
+  color:#000;
+}
+.wr {
+      background-color: #dcd7ee !important;
+    color:#000;
+}
+.rb {
+      background-color: #39ff14 !important;
+    color:#000;
+}
+.te {
+      background-color: #f65c26 !important;
 }</css>
         <data_table>sp_instance</data_table>
         <demo_data/>
@@ -103,6 +126,12 @@ var dr = new GlideRecord('x_snc_fantasydraft_drafts');
 		data.draftingOwner=co.owner.abbr.getDisplayValue();
 		data.draftingOwnerId=co.owner.sys_id.getDisplayValue();
 	}
+	data.positionQBCount = getPositionCount(dr.sys_id,co.owner,'QB');
+	data.positionRBCount = getPositionCount(dr.sys_id,co.owner,'RB');
+	data.positionWRCount = getPositionCount(dr.sys_id,co.owner,'WR');
+	data.positionTECount = getPositionCount(dr.sys_id,co.owner,'WR,TE');
+	data.positionDSTCount = getPositionCount(dr.sys_id,co.owner,'DST');
+	data.positionKCount = getPositionCount(dr.sys_id,co.owner,'K');
 }
 
 function translatePick(number) {
@@ -125,35 +154,50 @@ function translateRound(number) {
 		data.round++;
 		translateRound(number);
 	}
-}]]></script>
+}
+
+function getPositionCount(draft,owner,position){
+	var pc = new GlideRecord('x_snc_fantasydraft_draft_picks');
+	pc.addQuery('draft', draft);
+	pc.addQuery('owner',owner);
+	pc.addQuery('player.position','IN',position)
+	pc.query();
+	return pc.getRowCount();
+}
+]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2017-08-20 04:03:28</sys_created_on>
         <sys_id>a2eb7233db2ccf007e0ef2131f961920</sys_id>
-        <sys_mod_count>124</sys_mod_count>
+        <sys_mod_count>176</sys_mod_count>
         <sys_name>Draft Header</sys_name>
         <sys_package display_value="Live Fantasy Draft" source="x_snc_fantasydraft">0509ba21dbe80b007e0ef2131f9619b6</sys_package>
         <sys_policy/>
         <sys_scope display_value="Live Fantasy Draft">0509ba21dbe80b007e0ef2131f9619b6</sys_scope>
         <sys_update_name>sp_widget_a2eb7233db2ccf007e0ef2131f961920</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-08-22 13:37:07</sys_updated_on>
+        <sys_updated_on>2017-08-24 06:48:09</sys_updated_on>
         <template><![CDATA[<div ng-if="activeTimer" class="col-xs-1 btn btn-circle text-white" ng-class="getColor(remaining)" ng-click="stopTimer()">
   {{remaining}}
 </div>
 <div ng-if="!activeTimer" class="col-xs-1 btn btn-circle text-white" ng-class="getColor(remaining)" ng-click="restatTimeout()">
   {{remaining}}
 </div>
-<div class="col-xs-8 text-center">
-  <button class="btn btn-info btn-lg" disabled>
+<div class="col-xs-10 text-center">
+  <button class="btn btn-info btn-lg btn-block" disabled>
     {{c.data.draftingOwner}}: P{{c.data.current_pick}} in R#{{c.data.round}}
   </button>
-
 </div>
-<div class="col-xs-1 btn btn-circle text-white btn-info" ng-click="editDraft()">
-   <span class="fa fa-pencil"></span>
-</div>
-]]></template>
+<div class="col-xs-12" >
+  <div class="row">
+    <div class="col-xs-2"><span class="label qb">QB {{c.data.positionQBCount}}/1</span></div>
+    <div class="col-xs-2"><span class="label wr">WR {{c.data.positionWRCount}}/2</span></div>
+    <div class="col-xs-2"><span class="label rb">RB {{c.data.positionRBCount}}/2</span></div>
+    <div class="col-xs-2"><span class="label te">TE {{c.data.positionTECount}}/1</span></div>
+    <div class="col-xs-2"><span class="label dst">DST {{c.data.positionDSTCount}}/1</span></div>
+    <div class="col-xs-2"><span class="label k">K {{c.data.positionKCount}}/1</span></div>
+  </div>
+</div>]]></template>
     </sp_widget>
 </record_update>

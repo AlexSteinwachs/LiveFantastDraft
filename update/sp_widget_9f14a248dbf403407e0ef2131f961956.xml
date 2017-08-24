@@ -8,6 +8,16 @@
 		console.log("Setting owner to "+data);
 		c.data.draftingOwner=data.id;
 		c.data.draftingPick=data.pick;
+		c.data.draftingRound=parseInt(data.round);
+	});
+
+	$rootScope.$on('searchQuery', function(event,data) {
+		c.data.searchName=data.name;
+		c.data.searchPosition=data.position;
+		c.data.searchByeWeek=data.bye;
+		c.data.searchTeam=data.team;
+		c.data.searchTerms=true;
+		c.server.update();
 	});
 
 	$scope.expandCard = function(player){
@@ -15,6 +25,7 @@
 			c.data.expandCard = '';
 		} else {
 			c.data.expandCard = player;
+			c.server.update();
 		}
 	}
 
@@ -27,13 +38,13 @@
 
 	$scope.positionClass = function(position){
 		if(position == 'WR'){
-			return 'bg-wr text-white'
+			return 'bg-wr text-black'
 		}
 		if(position == 'RB'){
 			return 'bg-rb text-white'
 		}
 		if(position == 'QB'){
-			return 'bg-qb text-white'
+			return 'bg-qb text-black'
 		}
 		if(position == 'TE'){
 			return 'bg-te text-white'
@@ -50,22 +61,22 @@
 }]]></client_script>
         <controller_as>c</controller_as>
         <css>.bg-wr{
-background:#D3D017;
+background:#dcd7ee;
 }
 .bg-rb{
-background:#177AD3;
+background:#39ff14;
 }
 .bg-qb{
-background:#D3D017;
+background:#7efecf;
 }
 .bg-te{
-background:#177AD3;
+background:#f65c26;
 }
 .bg-dst{
-background:#D3D017;
+background:#a0caf0;
 }
 .bg-k{
-background:#177AD3;
+background:#ff0080;
 }
 
 
@@ -334,23 +345,51 @@ background:#177AD3;
         <option_schema/>
         <public>false</public>
         <roles/>
-        <script><![CDATA[data.draft=$sp.getParameter("number");
+        <script><![CDATA[
 
 if (!input && !data.isLoaded){
-loadPlayerList();
+	data.draft=$sp.getParameter("number");
+	input='';
+	loadPlayerList();
 }
 
 if (typeof input != "undefined" && input.draftedPlayer) {
 	draftPlayer(input.draftedPlayer);
 }
 
+if ((typeof input != "undefined") && (input.searchName || input.searchPosition ||input.searchByeWeek ||input.searchTeam||input.searchTerms)) {
+	loadPlayerList();
+}
 
+if (typeof input != "undefined" && input.expandCard) {
+	data.debug='here';
+	data.findRelatedPlayersBoth=data.findRelatedPlayersPosition=data.findRelatedPlayersBye=[];
+	data.findRelatedPlayersBoth = findRelatedPlayers(input.expandCard,'both');
+	data.findRelatedPlayersPosition = findRelatedPlayers(input.expandCard,'position');
+	data.findRelatedPlayersBye = findRelatedPlayers(input.expandCard,'bye');
+}
 
 function loadPlayerList(){
 	data.players = [];
 	var pl = new GlideRecord('x_snc_fantasydraft_draft_picks');
 	pl.addQuery('draft.number',$sp.getParameter("number"));
 	pl.addQuery('owner', '');
+	if (input.searchName) {
+		pl.addQuery('player.name','CONTAINS',input.searchName)
+	}
+	if (input.searchPosition) {
+		if (input.searchPosition == 'TE'){
+			pl.addQuery('player.position','IN','TE,WR');
+		} else {
+			pl.addQuery('player.position',input.searchPosition)
+		}
+	}
+	if (input.searchByeWeek) {
+		pl.addQuery('player.team.bye_week', input.searchByeWeek)
+	}
+	if (input.searchTeam) {
+		pl.addQuery('player.team.abbr', input.searchTeam)
+	}
 	pl.orderBy('player.adp');
 	pl.setLimit(15);
 	pl.query();
@@ -360,7 +399,8 @@ function loadPlayerList(){
 			"adp": pl.player.adp.getDisplayValue(),
 			"position": pl.player.position.getDisplayValue(),
 			"logo": pl.player.team.logo.getDisplayValue(),
-			"sys_id": pl.sys_id.getDisplayValue()
+			"sys_id": pl.sys_id.getDisplayValue(),
+			"bye":pl.player.team.bye_week.getDisplayValue()
 		};
 		player.adp = parseFloat(player.adp);
 		data.players.push(player);
@@ -377,20 +417,53 @@ function draftPlayer(player){
 	draft.get("number",$sp.getParameter("number"));
 	draft.pick_number = draft.pick_number + 1;
 	draft.update();
+}
+
+function findRelatedPlayers(player,type){
+	var relatedPlayersArray=[];
+	//load selected player
+	var expandedPlayer = new GlideRecord('x_snc_fantasydraft_draft_picks');
+	expandedPlayer.get(player);
+	//load all drafted players for the current owner that share a bye week and position as the current player
+	var related = new GlideRecord('x_snc_fantasydraft_draft_picks');
+	if (type == 'bye' || type == 'both'){
+		related.addQuery('player.team.bye_week',expandedPlayer.player.team.bye_week.getDisplayValue());
+	}
+	if (type == 'position' || type == 'both'){
+		if (expandedPlayer.player.position == 'TE'||expandedPlayer.player.position == 'WR'){
+			related.addQuery('player.position','IN','WR,TE');
+		} else {
+			related.addQuery('player.position',expandedPlayer.player.position.getDisplayValue());
+		}
+	}
+	related.addQuery('draft.number',$sp.getParameter("number"));
+	related.addQuery('owner', input.draftingOwner);
+	related.query();
+	while (related.next()){
+		player = {
+			"name":related.player.name.getDisplayValue(),
+			"position":related.player.position.getDisplayValue(),
+			"adp":related.player.adp.getDisplayValue(),
+			"logo": related.player.team.logo.getDisplayValue()
+		}
+		relatedPlayersArray.push(player);
+	}
+	return relatedPlayersArray;
+
 }]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2017-08-20 20:57:57</sys_created_on>
         <sys_id>9f14a248dbf403407e0ef2131f961956</sys_id>
-        <sys_mod_count>143</sys_mod_count>
+        <sys_mod_count>215</sys_mod_count>
         <sys_name>Draft Player List</sys_name>
         <sys_package display_value="Live Fantasy Draft" source="x_snc_fantasydraft">0509ba21dbe80b007e0ef2131f9619b6</sys_package>
         <sys_policy/>
         <sys_scope display_value="Live Fantasy Draft">0509ba21dbe80b007e0ef2131f9619b6</sys_scope>
         <sys_update_name>sp_widget_9f14a248dbf403407e0ef2131f961956</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-08-22 13:59:53</sys_updated_on>
+        <sys_updated_on>2017-08-24 06:55:36</sys_updated_on>
         <template><![CDATA[<div class="approve-reject" ng-if="data.players.length > 0" ng-repeat="player in data.players|orderBy:'adp'">
   <div class="body">
     <div class="body-wrapper">
@@ -402,13 +475,53 @@ function draftPlayer(player){
           </div>
         </div>
         <div class="second-line">
-          <p class="sub-title text-sixteen text-upper">{{player.adp}}</p>
+          <p class="sub-title text-sixteen text-upper">{{player.adp}} <i class="fa fa-check text-success" ng-show="player.adp < c.data.draftingRound +1"></i></p>
           <div class="right-side">
             <img class="" ng-src="{{player.logo}}" height="36px"/>
           </div>
         </div>
         <div ng-show="c.data.expandCard == player.sys_id">
-          Player:{{player.sys_id}} Owner:{{c.data.draftingOwner}} Pick:{{c.data.draftingPick}}
+          <div class="col-xs-12" ng-show="c.data.findRelatedPlayersBoth.length > 0">
+            <div class="panel panel-danger text-center">
+              <div class="panel-heading">Shares Position & Bye</div>
+            </div>
+            <table class="table">
+              <tbody>
+                <tr ng-repeat="relatedPlayersBoth in c.data.findRelatedPlayersBoth|orderBy:'adp'">
+                  <td>{{relatedPlayersBoth.name}}</td>
+                  <td>{{relatedPlayersBoth.adp}}</td>
+                  <td>{{relatedPlayersBoth.position}}</td>
+                  <td><img class="" ng-src="{{relatedPlayersBoth.logo}}" height="20px"/></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-xs-6" ng-show="c.data.findRelatedPlayersPosition.length > 0">
+            <div class="panel panel-success text-center">
+              <div class="panel-heading">Shares Position</div>
+            </div>
+            <table class="table">
+              <tbody>
+                <tr ng-repeat="relatedPlayersPosition in c.data.findRelatedPlayersPosition|orderBy:'adp'">
+                  <td>{{relatedPlayersPosition.name}}</td>
+                  <td><img class="" ng-src="{{relatedPlayersPosition.logo}}" height="20px"/></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-xs-6" ng-show="c.data.findRelatedPlayersBye.length > 0">
+            <div class="panel panel-warning text-center">
+              <div class="panel-heading">Shares Bye</div>
+            </div>
+            <table class="table">
+              <tbody>
+                <tr ng-repeat="relatedPlayersBye in c.data.findRelatedPlayersBye|orderBy:'adp'">
+                  <td>{{relatedPlayersBye.name}}</td>
+                  <td><img class="" ng-src="{{relatedPlayersBye.logo}}" height="20px"/></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <div class="buttons">
             <button class="approve-btn btn green-text" ng-click="draftPlayer(player.sys_id)"><i class="fa fa-check" aria-hidden="true"></i>draft</button>
           </div>
