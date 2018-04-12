@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
         <client_script><![CDATA[function($filter,$location,$rootScope,$scope,$timeout,spUtil,$window) {
 	var c = this;	
 
@@ -367,6 +368,7 @@ if (typeof input != "undefined" && input.expandCard) {
 	data.findRelatedPlayersBoth = findRelatedPlayers(input.expandCard,'both');
 	data.findRelatedPlayersPosition = findRelatedPlayers(input.expandCard,'position');
 	data.findRelatedPlayersBye = findRelatedPlayers(input.expandCard,'bye');
+	playerTierCheck(input.expandCard);
 }
 
 function loadPlayerList(){
@@ -399,10 +401,18 @@ function loadPlayerList(){
 			"adp": pl.player.adp.getDisplayValue(),
 			"position": pl.player.position.getDisplayValue(),
 			"logo": pl.player.team.logo.getDisplayValue(),
+			"team": pl.player.team.abbr.getDisplayValue(),
 			"sys_id": pl.sys_id.getDisplayValue(),
-			"bye":pl.player.team.bye_week.getDisplayValue()
+			"bye":pl.player.team.bye_week.getDisplayValue(),
+			"position_rank": pl.player.position_rank.getDisplayValue(),
+			"overall": pl.player.overall.getDisplayValue(),
+			"tier": pl.player.tier.getDisplayValue()
 		};
 		player.adp = parseFloat(player.adp);
+		player.position_rank= parseInt(player.position_rank);
+		player.overall= parseInt(player.overall);
+		player.tier= parseInt(player.tier);
+
 		data.players.push(player);
 	}
 }
@@ -444,43 +454,69 @@ function findRelatedPlayers(player,type){
 			"name":related.player.name.getDisplayValue(),
 			"position":related.player.position.getDisplayValue(),
 			"adp":related.player.adp.getDisplayValue(),
-			"logo": related.player.team.logo.getDisplayValue()
+			"logo": related.player.team.logo.getDisplayValue(),
+			"team": related.player.team.abbr.getDisplayValue()
 		}
 		relatedPlayersArray.push(player);
 	}
 	return relatedPlayersArray;
+}
 
-}]]></script>
+function playerTierCheck(player){
+	var p = new GlideRecord('x_snc_fantasydraft_draft_picks');
+	p.get(player);
+	var tp = new GlideRecord('x_snc_fantasydraft_draft_picks');
+	tp.addQuery('player.tier',p.player.tier.getDisplayValue())
+	if (p.player.position == 'TE'||p.player.position == 'WR'){
+		tp.addQuery('player.position','IN','WR,TE');
+	} else {
+		tp.addQuery('player.position',p.player.position.getDisplayValue());
+	}
+	tp.addQuery('draft.number',$sp.getParameter("number"));
+	tp.query();
+	data.positionTierTotal = tp.getRowCount();
+	tp.addQuery('owner','');
+	tp.query();
+	data.positionTierRemaining = tp.getRowCount();
+}
+
+]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2017-08-20 20:57:57</sys_created_on>
         <sys_id>9f14a248dbf403407e0ef2131f961956</sys_id>
-        <sys_mod_count>215</sys_mod_count>
+        <sys_mod_count>248</sys_mod_count>
         <sys_name>Draft Player List</sys_name>
         <sys_package display_value="Live Fantasy Draft" source="x_snc_fantasydraft">0509ba21dbe80b007e0ef2131f9619b6</sys_package>
         <sys_policy/>
         <sys_scope display_value="Live Fantasy Draft">0509ba21dbe80b007e0ef2131f9619b6</sys_scope>
         <sys_update_name>sp_widget_9f14a248dbf403407e0ef2131f961956</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-08-24 06:55:36</sys_updated_on>
+        <sys_updated_by>alex</sys_updated_by>
+        <sys_updated_on>2018-04-12 01:00:41</sys_updated_on>
         <template><![CDATA[<div class="approve-reject" ng-if="data.players.length > 0" ng-repeat="player in data.players|orderBy:'adp'">
   <div class="body">
     <div class="body-wrapper">
       <div class="card" ng-click="expandCard(player.sys_id)">
         <div class="first-line">
           <p class="title">{{player.name}}</p>
+          <p class="sub-title text-twelve text-upper"> {{player.adp}} <i class="fa fa-check text-success" ng-show="player.adp < c.data.draftingRound +1"></i></p>
           <div class="attn-text rounded" ng-class="positionClass(player.position)">
             <p class="text-twelve text-upper ">{{player.position}}</p>
           </div>
-        </div>
-        <div class="second-line">
-          <p class="sub-title text-sixteen text-upper">{{player.adp}} <i class="fa fa-check text-success" ng-show="player.adp < c.data.draftingRound +1"></i></p>
           <div class="right-side">
-            <img class="" ng-src="{{player.logo}}" height="36px"/>
+            <!-- <img class="" ng-src="{{player.logo}}" height="36px"/>-->
+            <p class="text-twelve text-upper ">{{player.team}}</p>
           </div>
         </div>
         <div ng-show="c.data.expandCard == player.sys_id">
+          <div class="second-line">
+            <p class="sub-title text-twelve text-upper">Overall: {{player.overall}}</p>
+            <p class="sub-title text-twelve text-upper">Position: {{player.position_rank}}</p>
+            <p class="sub-title text-twelve text-upper">Bye: {{player.bye}}</p>
+            <p class="sub-title text-twelve text-upper">Tier: {{player.tier}}</p>
+            <p class="sub-title text-twelve text-upper">Remaining:{{c.data.positionTierRemaining}}/{{c.data.positionTierTotal}}</p>
+          </div>
           <div class="col-xs-12" ng-show="c.data.findRelatedPlayersBoth.length > 0">
             <div class="panel panel-danger text-center">
               <div class="panel-heading">Shares Position & Bye</div>
@@ -491,7 +527,7 @@ function findRelatedPlayers(player,type){
                   <td>{{relatedPlayersBoth.name}}</td>
                   <td>{{relatedPlayersBoth.adp}}</td>
                   <td>{{relatedPlayersBoth.position}}</td>
-                  <td><img class="" ng-src="{{relatedPlayersBoth.logo}}" height="20px"/></td>
+                  <td>{{relatedPlayersBye.team}}<!-- <img class="" ng-src="{{relatedPlayersBoth.logo}}" height="20px"/>--></td>
                 </tr>
               </tbody>
             </table>
@@ -504,7 +540,7 @@ function findRelatedPlayers(player,type){
               <tbody>
                 <tr ng-repeat="relatedPlayersPosition in c.data.findRelatedPlayersPosition|orderBy:'adp'">
                   <td>{{relatedPlayersPosition.name}}</td>
-                  <td><img class="" ng-src="{{relatedPlayersPosition.logo}}" height="20px"/></td>
+                  <td>{{relatedPlayersBye.team}}<!-- <img class="" ng-src="{{relatedPlayersPosition.logo}}" height="20px"/>--></td>
                 </tr>
               </tbody>
             </table>
@@ -517,7 +553,7 @@ function findRelatedPlayers(player,type){
               <tbody>
                 <tr ng-repeat="relatedPlayersBye in c.data.findRelatedPlayersBye|orderBy:'adp'">
                   <td>{{relatedPlayersBye.name}}</td>
-                  <td><img class="" ng-src="{{relatedPlayersBye.logo}}" height="20px"/></td>
+                  <td>{{relatedPlayersBye.team}}<!--<img class="" ng-src="{{relatedPlayersBye.logo}}" height="20px"/>--></td>
                 </tr>
               </tbody>
             </table>

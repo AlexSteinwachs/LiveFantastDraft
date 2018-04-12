@@ -16,16 +16,16 @@
         <source_table>u_imp_tmpl_x_snc_fantasydraft_players</source_table>
         <sys_class_name>sys_transform_map</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2017-08-13 05:31:05</sys_created_on>
-        <sys_id>31dc4fa5db2c0b007e0ef2131f9619c6</sys_id>
+        <sys_created_on>2017-08-27 00:22:12</sys_created_on>
+        <sys_id>616c8206db3c0300a8cffa56bf96196d</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name>u_imp_tmpl_x_snc_fantasydraft_players</sys_name>
         <sys_package display_value="Live Fantasy Draft" source="x_snc_fantasydraft">0509ba21dbe80b007e0ef2131f9619b6</sys_package>
         <sys_policy/>
         <sys_scope display_value="Live Fantasy Draft">0509ba21dbe80b007e0ef2131f9619b6</sys_scope>
-        <sys_update_name>sys_transform_map_31dc4fa5db2c0b007e0ef2131f9619c6</sys_update_name>
+        <sys_update_name>sys_transform_map_616c8206db3c0300a8cffa56bf96196d</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-08-13 05:31:05</sys_updated_on>
+        <sys_updated_on>2017-08-27 00:22:12</sys_updated_on>
         <target_table>x_snc_fantasydraft_players</target_table>
     </sys_transform_map>
 </record_update>

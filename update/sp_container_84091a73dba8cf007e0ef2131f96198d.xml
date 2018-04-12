@@ -7,22 +7,22 @@
         <bootstrap_alt>false</bootstrap_alt>
         <class_name/>
         <container_class_name/>
-        <name>Modify Draft - Container 1</name>
+        <name>Edit Draft - Container 1</name>
         <order>1</order>
-        <sp_page display_value="modify_draft">88091a73dba8cf007e0ef2131f96198b</sp_page>
+        <sp_page display_value="edit_draft">88091a73dba8cf007e0ef2131f96198b</sp_page>
         <subheader>false</subheader>
         <sys_class_name>sp_container</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2017-08-20 01:30:55</sys_created_on>
         <sys_id>84091a73dba8cf007e0ef2131f96198d</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_name>Modify Draft - Container 1</sys_name>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Edit Draft - Container 1</sys_name>
         <sys_package display_value="Live Fantasy Draft" source="x_snc_fantasydraft">0509ba21dbe80b007e0ef2131f9619b6</sys_package>
         <sys_policy/>
         <sys_scope display_value="Live Fantasy Draft">0509ba21dbe80b007e0ef2131f9619b6</sys_scope>
         <sys_update_name>sp_container_84091a73dba8cf007e0ef2131f96198d</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-08-20 01:30:55</sys_updated_on>
+        <sys_updated_on>2017-08-27 01:47:19</sys_updated_on>
         <title/>
         <width>container</width>
     </sp_container>

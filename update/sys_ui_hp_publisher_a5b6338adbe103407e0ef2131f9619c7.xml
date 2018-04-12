@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_hp_publisher">
+    <sys_ui_hp_publisher action="INSERT_OR_UPDATE">
+        <allow_extended_table>false</allow_extended_table>
+        <boolean_field/>
+        <boolean_table/>
+        <date_filter/>
+        <default_boolean_field/>
+        <default_choice/>
+        <default_date_filter/>
+        <default_reference_field_value>cb12399edbf443007e0ef2131f96190d</default_reference_field_value>
+        <description/>
+        <exclusion_choice_list/>
+        <look_up_name>Draft - Draft Number</look_up_name>
+        <name>Draft - Draft Number</name>
+        <reference_conditions/>
+        <reference_table>x_snc_fantasydraft_drafts</reference_table>
+        <source_field/>
+        <source_table/>
+        <sys_class_name>sys_ui_hp_publisher</sys_class_name>
+        <sys_created_by>alex</sys_created_by>
+        <sys_created_on>2017-10-03 14:55:51</sys_created_on>
+        <sys_id>a5b6338adbe103407e0ef2131f9619c7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Draft - Draft Number</sys_name>
+        <sys_package display_value="Live Fantasy Draft" source="x_snc_fantasydraft">0509ba21dbe80b007e0ef2131f9619b6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Live Fantasy Draft">0509ba21dbe80b007e0ef2131f9619b6</sys_scope>
+        <sys_update_name>sys_ui_hp_publisher_a5b6338adbe103407e0ef2131f9619c7</sys_update_name>
+        <sys_updated_by>alex</sys_updated_by>
+        <sys_updated_on>2017-10-03 14:55:51</sys_updated_on>
+        <type>2</type>
+        <ui_control_type>2</ui_control_type>
+    </sys_ui_hp_publisher>
+</record_update>

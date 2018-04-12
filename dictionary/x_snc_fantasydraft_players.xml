@@ -14,7 +14,9 @@
                 <element label="DST" sequence="6" value="DST"/>
             </choice>
         </element>
+        <element label="Position Rank" max_length="40" name="position_rank" type="integer"/>
         <element label="Team" max_length="32" name="team" reference="x_snc_fantasydraft_teams" type="reference"/>
+        <element label="Tier" max_length="40" name="tier" type="integer"/>
         <index name="index">
             <element name="team"/>
         </index>

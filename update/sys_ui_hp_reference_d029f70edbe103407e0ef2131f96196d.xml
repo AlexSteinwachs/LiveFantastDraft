@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_hp_reference">
+    <sys_ui_hp_reference action="INSERT_OR_UPDATE">
+        <publisher_reference display_value="Draft - Owners">4fa7ff8adbe103407e0ef2131f961912</publisher_reference>
+        <reference_field>owner</reference_field>
+        <reference_table>x_snc_fantasydraft_draft_picks</reference_table>
+        <sys_class_name>sys_ui_hp_reference</sys_class_name>
+        <sys_created_by>alex</sys_created_by>
+        <sys_created_on>2017-10-03 15:04:42</sys_created_on>
+        <sys_id>d029f70edbe103407e0ef2131f96196d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>4fa7ff8adbe103407e0ef2131f961912</sys_name>
+        <sys_package display_value="Live Fantasy Draft" source="x_snc_fantasydraft">0509ba21dbe80b007e0ef2131f9619b6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Live Fantasy Draft">0509ba21dbe80b007e0ef2131f9619b6</sys_scope>
+        <sys_update_name>sys_ui_hp_reference_d029f70edbe103407e0ef2131f96196d</sys_update_name>
+        <sys_updated_by>alex</sys_updated_by>
+        <sys_updated_on>2017-10-03 15:04:42</sys_updated_on>
+    </sys_ui_hp_reference>
+</record_update>
