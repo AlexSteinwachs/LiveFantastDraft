@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update table="sys_ui_hp_reference">
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_hp_reference">
     <sys_ui_hp_reference action="INSERT_OR_UPDATE">
         <publisher_reference display_value="Draft - NFL Team">2067bb8adbe103407e0ef2131f9619fe</publisher_reference>
         <reference_field>player.team</reference_field>

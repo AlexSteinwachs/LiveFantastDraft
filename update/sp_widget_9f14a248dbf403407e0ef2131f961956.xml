@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update table="sp_widget">
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
         <client_script><![CDATA[function($filter,$location,$rootScope,$scope,$timeout,spUtil,$window) {
@@ -343,10 +342,10 @@ background:#ff0080;
         <internal>false</internal>
         <link/>
         <name>Draft Player List</name>
-        <option_schema/>
+        <option_schema>[{"name":"example","section":"other","label":"Example","type":"string"}]</option_schema>
         <public>false</public>
         <roles/>
-        <script><![CDATA[
+        <script><![CDATA[data.example=options.example;
 
 if (!input && !data.isLoaded){
 	data.draft=$sp.getParameter("number");
@@ -486,15 +485,15 @@ function playerTierCheck(player){
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2017-08-20 20:57:57</sys_created_on>
         <sys_id>9f14a248dbf403407e0ef2131f961956</sys_id>
-        <sys_mod_count>248</sys_mod_count>
+        <sys_mod_count>254</sys_mod_count>
         <sys_name>Draft Player List</sys_name>
         <sys_package display_value="Live Fantasy Draft" source="x_snc_fantasydraft">0509ba21dbe80b007e0ef2131f9619b6</sys_package>
         <sys_policy/>
         <sys_scope display_value="Live Fantasy Draft">0509ba21dbe80b007e0ef2131f9619b6</sys_scope>
         <sys_update_name>sp_widget_9f14a248dbf403407e0ef2131f961956</sys_update_name>
         <sys_updated_by>alex</sys_updated_by>
-        <sys_updated_on>2018-04-12 01:00:41</sys_updated_on>
-        <template><![CDATA[<div class="approve-reject" ng-if="data.players.length > 0" ng-repeat="player in data.players|orderBy:'adp'">
+        <sys_updated_on>2018-08-21 02:54:26</sys_updated_on>
+        <template><![CDATA[<div class="approve-reject" ng-if="data.players.length > 0" ng-repeat="player in data.players|orderBy:['adp','overall']">
   <div class="body">
     <div class="body-wrapper">
       <div class="card" ng-click="expandCard(player.sys_id)">
@@ -505,8 +504,8 @@ function playerTierCheck(player){
             <p class="text-twelve text-upper ">{{player.position}}</p>
           </div>
           <div class="right-side">
-            <!-- <img class="" ng-src="{{player.logo}}" height="36px"/>-->
-            <p class="text-twelve text-upper ">{{player.team}}</p>
+            <img class="" ng-src="{{player.logo}}" height="36px"/>
+            <!-- <p class="text-twelve text-upper ">{{player.team}}</p>-->
           </div>
         </div>
         <div ng-show="c.data.expandCard == player.sys_id">
@@ -527,7 +526,7 @@ function playerTierCheck(player){
                   <td>{{relatedPlayersBoth.name}}</td>
                   <td>{{relatedPlayersBoth.adp}}</td>
                   <td>{{relatedPlayersBoth.position}}</td>
-                  <td>{{relatedPlayersBye.team}}<!-- <img class="" ng-src="{{relatedPlayersBoth.logo}}" height="20px"/>--></td>
+                  <td><!-- {{relatedPlayersBye.team}}--><img class="" ng-src="{{relatedPlayersBoth.logo}}" height="20px"/></td>
                 </tr>
               </tbody>
             </table>
@@ -540,7 +539,7 @@ function playerTierCheck(player){
               <tbody>
                 <tr ng-repeat="relatedPlayersPosition in c.data.findRelatedPlayersPosition|orderBy:'adp'">
                   <td>{{relatedPlayersPosition.name}}</td>
-                  <td>{{relatedPlayersBye.team}}<!-- <img class="" ng-src="{{relatedPlayersPosition.logo}}" height="20px"/>--></td>
+                  <td><!-- {{relatedPlayersBye.team}}--><img class="" ng-src="{{relatedPlayersPosition.logo}}" height="20px"/></td>
                 </tr>
               </tbody>
             </table>
@@ -553,7 +552,7 @@ function playerTierCheck(player){
               <tbody>
                 <tr ng-repeat="relatedPlayersBye in c.data.findRelatedPlayersBye|orderBy:'adp'">
                   <td>{{relatedPlayersBye.name}}</td>
-                  <td>{{relatedPlayersBye.team}}<!--<img class="" ng-src="{{relatedPlayersBye.logo}}" height="20px"/>--></td>
+                  <td><!--{{relatedPlayersBye.team}}--><img class="" ng-src="{{relatedPlayersBye.logo}}" height="20px"/></td>
                 </tr>
               </tbody>
             </table>

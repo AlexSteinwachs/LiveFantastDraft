@@ -1,17 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<database>
+<?xml version="1.0" encoding="UTF-8"?><database>
     <element label="Players" max_length="40" name="x_snc_fantasydraft_players" type="collection">
         <element label="ADP" max_length="20" name="adp" type="decimal"/>
         <element display="true" label="Name" max_length="50" name="name" type="string"/>
         <element label="Overall" max_length="20" name="overall" type="decimal"/>
         <element choice="1" label="Position" max_length="40" name="position" type="choice">
             <choice>
-                <element label="QB" sequence="1" value="QB"/>
-                <element label="RB" sequence="2" value="RB"/>
-                <element label="WR" sequence="3" value="WR"/>
-                <element label="TE" sequence="4" value="TE"/>
-                <element label="K" sequence="5" value="K"/>
-                <element label="DST" sequence="6" value="DST"/>
+                <element inactive_on_update="false" label="QB" sequence="1" value="QB"/>
+                <element inactive_on_update="false" label="RB" sequence="2" value="RB"/>
+                <element inactive_on_update="false" label="WR" sequence="3" value="WR"/>
+                <element inactive_on_update="false" label="TE" sequence="4" value="TE"/>
+                <element inactive_on_update="false" label="K" sequence="5" value="K"/>
+                <element inactive_on_update="false" label="DST" sequence="6" value="DST"/>
             </choice>
         </element>
         <element label="Position Rank" max_length="40" name="position_rank" type="integer"/>

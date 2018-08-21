@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update table="sys_transform_map">
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_transform_map">
     <sys_transform_map action="INSERT_OR_UPDATE">
         <active>true</active>
         <copy_empty_fields>false</copy_empty_fields>
@@ -15,17 +14,17 @@
 })(source, target, map, log, action==="update");]]></script>
         <source_table>u_imp_tmpl_x_snc_fantasydraft_players</source_table>
         <sys_class_name>sys_transform_map</sys_class_name>
-        <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2017-08-27 00:22:12</sys_created_on>
-        <sys_id>616c8206db3c0300a8cffa56bf96196d</sys_id>
+        <sys_created_by>alex</sys_created_by>
+        <sys_created_on>2018-08-21 02:49:17</sys_created_on>
+        <sys_id>2cd02b29db0423007e0ef2131f9619f4</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name>u_imp_tmpl_x_snc_fantasydraft_players</sys_name>
         <sys_package display_value="Live Fantasy Draft" source="x_snc_fantasydraft">0509ba21dbe80b007e0ef2131f9619b6</sys_package>
         <sys_policy/>
         <sys_scope display_value="Live Fantasy Draft">0509ba21dbe80b007e0ef2131f9619b6</sys_scope>
-        <sys_update_name>sys_transform_map_616c8206db3c0300a8cffa56bf96196d</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-08-27 00:22:12</sys_updated_on>
+        <sys_update_name>sys_transform_map_2cd02b29db0423007e0ef2131f9619f4</sys_update_name>
+        <sys_updated_by>alex</sys_updated_by>
+        <sys_updated_on>2018-08-21 02:49:17</sys_updated_on>
         <target_table>x_snc_fantasydraft_players</target_table>
     </sys_transform_map>
 </record_update>
